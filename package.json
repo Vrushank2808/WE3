@@ -1,0 +1,36 @@
+{
+  "name": "we3-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WE3 Agency - Premium web design and development",
+  "author": "WE3 Agency",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "analyze": "ANALYZE=true next build",
+    "clean": "rm -rf .next out node_modules/.cache"
+  },
+  "dependencies": {
+    "@studio-freight/react-lenis": "^0.0.47",
+    "gsap": "^3.14.2",
+    "next": "16.1.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.1",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

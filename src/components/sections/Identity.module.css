@@ -1,0 +1,46 @@
+.identitySection {
+  position: relative;
+  padding: 8rem 0 6rem;
+  background-color: var(--bg-color);
+  z-index: 1;
+}
+
+.label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 3rem;
+}
+
+.storyContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.storyLine {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.3;
+  font-weight: 500;
+  color: var(--text-color);
+  max-width: 30ch;
+}
+
+.storyLine strong {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .identitySection {
+    padding: 4rem 0 3rem;
+  }
+
+  .storyLine {
+    max-width: 100%;
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+}

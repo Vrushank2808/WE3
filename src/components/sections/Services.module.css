@@ -1,0 +1,219 @@
+.servicesSection {
+  padding: 6rem 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  position: relative;
+  z-index: 20;
+}
+
+.title {
+  margin-bottom: 3rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+}
+
+.listContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Glass Card */
+.serviceBlock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 3.5rem 2.5rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  height: 100%;
+}
+
+/* ... (omitting intermediate changes for brevity if unchanged, but need to be careful with chunks) ... */
+/* Actually, I need to replace the whole block effectively or use targeted chunks */
+
+/* Let's focus on blockTitle */
+
+.blockTitle {
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  /* Increased size */
+  font-weight: 700;
+  /* Increased bold */
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+  line-height: 1.1;
+  color: #fff;
+  /* Purified white for contrast */
+  /* Remove gradient text for better legibility against glass card */
+  /* background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 100%); */
+}
+
+.serviceBlock::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.5), rgba(118, 75, 162, 0.5), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.serviceBlock::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(102, 126, 234, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.serviceBlock:hover {
+  transform: translateY(-8px);
+  border-color: rgba(102, 126, 234, 0.3);
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(102, 126, 234, 0.1);
+}
+
+.serviceBlock:hover::before {
+  opacity: 1;
+}
+
+.serviceBlock:hover::after {
+  opacity: 1;
+}
+
+.serviceBlock:focus-within {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+.blockTitle {
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.blockDescription {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+}
+
+/* Icon Style */
+.serviceIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+  color: #a78bfa;
+  transition: all 0.4s ease;
+}
+
+.serviceBlock:hover .serviceIcon {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(118, 75, 162, 0.3);
+}
+
+@media (max-width: 1024px) {
+  .servicesSection {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  .listContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .servicesSection {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  .title {
+    margin-bottom: 2rem;
+    font-size: 0.75rem;
+  }
+
+  .listContainer {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .serviceBlock {
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+  }
+
+  .serviceIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .blockTitle {
+    font-size: 1.5rem;
+  }
+
+  .blockDescription {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .servicesSection {
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .serviceBlock {
+    padding: 1.5rem;
+  }
+
+  .blockTitle {
+    font-size: 1.35rem;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .serviceBlock {
+    opacity: 1;
+    transition: none;
+  }
+
+  .serviceBlock:hover {
+    transform: none;
+  }
+}
