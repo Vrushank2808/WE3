@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import SmoothScroll from '@/components/providers/SmoothScroll'
 import Particles from '@/components/ui/Particles'
+import Preloader from '@/components/ui/Preloader'
 import SkipLink from '@/components/ui/SkipLink'
 import { SITE_CONFIG } from '@/lib/constants'
 import {
@@ -119,7 +120,7 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        
+
         {/* Structured Data for SEO */}
         <script
           type="application/ld+json"
@@ -135,6 +136,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <Preloader />
         <SkipLink />
         <Particles />
         <SmoothScroll>{children}</SmoothScroll>
