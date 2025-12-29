@@ -16,7 +16,7 @@
     "clean": "rm -rf .next out node_modules/.cache"
   },
   "dependencies": {
-    "@studio-freight/react-lenis": "^0.0.47",
+    "lenis": "^1.1.19",
     "gsap": "^3.14.2",
     "next": "16.1.1",
     "react": "19.2.3",
