@@ -29,15 +29,24 @@ export default function Why() {
     }
 
     const ctx = gsap.context(() => {
-      gsap.to(textRef.current, {
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 70%',
-        },
-      })
+      if (!textRef.current) return
+
+      gsap.fromTo(
+        textRef.current,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top 70%',
+            toggleActions: 'play reverse play reverse',
+            invalidateOnRefresh: true,
+          },
+        }
+      )
     }, containerRef)
 
     return () => ctx.revert()

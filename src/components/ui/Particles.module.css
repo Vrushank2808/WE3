@@ -13,7 +13,7 @@
   position: absolute;
   width: 4px;
   height: 4px;
-  background: rgba(118, 75, 162, 0.5);
+  background: var(--accent-glow);
   border-radius: 50%;
   animation: float 6s ease-in-out infinite;
 }
@@ -55,10 +55,12 @@
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }

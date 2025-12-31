@@ -9,7 +9,7 @@
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.3em;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--text-muted);
   margin-bottom: 3rem;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .storyLine strong {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: var(--accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 600;

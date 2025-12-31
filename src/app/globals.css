@@ -1,23 +1,22 @@
-/**
- * Global Styles
- * Design system variables, resets, and utility classes
- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* ==========================================================================
+/* ========================================================================== 
    CSS Custom Properties (Design Tokens)
    ========================================================================== */
 
 :root {
-  /* Colors */
-  --bg-color: #050505;
-  --bg-secondary: #0d0d0d;
-  --text-color: #f0f0f0;
-  --text-muted: #888888;
+  /* Default (Dark - Black & White) */
+  --bg-color: #000000;
+  --bg-secondary: #111111;
+  --text-color: #ffffff;
+  --text-muted: #999999;
   --accent-color: #ffffff;
-  --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-  --accent-glow: #764ba2;
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --card-border: rgba(255, 255, 255, 0.08);
+  --accent-gradient: linear-gradient(135deg, #ffffff 0%, #999999 100%);
+  --accent-glow: rgba(255, 255, 255, 0.2);
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.1);
   --glass-bg: rgba(255, 255, 255, 0.05);
 
   /* Typography */
@@ -29,16 +28,21 @@
 
   /* Transitions */
   --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
   --transition-duration: 0.3s;
+}
 
-  /* Z-index scale */
-  --z-base: 0;
-  --z-dropdown: 100;
-  --z-sticky: 200;
-  --z-fixed: 300;
-  --z-modal: 400;
-  --z-tooltip: 500;
+[data-theme='light'] {
+  --bg-color: #ffffff;
+  --bg-secondary: #f4f4f4;
+  --text-color: #000000;
+  --text-muted: #666666;
+  --accent-color: #000000;
+  --accent-gradient: linear-gradient(135deg, #000000 0%, #444444 100%);
+  --accent-glow: rgba(0, 0, 0, 0.2);
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(0, 0, 0, 0.12);
+  /* Slightly more transparent so backdrop blur reads clearly */
+  --glass-bg: rgba(255, 255, 255, 0.35);
 }
 
 /* ==========================================================================
@@ -53,11 +57,25 @@
   padding: 0;
 }
 
+/* Smooth theme transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Exclude certain elements from transition */
+canvas,
+img,
+video,
+svg {
+  transition: none;
+}
+
 html {
   -webkit-text-size-adjust: 100%;
   -moz-tab-size: 4;
   tab-size: 4;
   scroll-behavior: smooth;
+  scroll-padding-top: 96px;
 }
 
 /* Disable smooth scroll for reduced motion preference */
@@ -75,7 +93,14 @@ body {
   color: var(--text-color);
   font-family: var(--font-body);
   scrollbar-width: thin;
-  scrollbar-color: #333 transparent;
+  scrollbar-color: var(--text-muted) transparent;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Prevent scroll during preloader */
+body.preloader-active {
+  overflow: hidden !important;
+  height: 100vh !important;
 }
 
 body {
@@ -84,8 +109,8 @@ body {
   text-rendering: optimizeLegibility;
   font-feature-settings: 'kern' 1;
   background-image:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.15), transparent),
-    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(147, 51, 234, 0.1), transparent);
+    radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-glow), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 100%, var(--accent-glow), transparent);
   background-attachment: fixed;
   line-height: 1.6;
 }
@@ -103,7 +128,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #667eea, #764ba2);
+  background: linear-gradient(180deg, var(--text-muted), var(--text-color));
   border-radius: 3px;
 }
 
@@ -134,7 +159,7 @@ a {
 }
 
 a:focus-visible {
-  outline: 2px solid #667eea;
+  outline: 2px solid var(--text-color);
   outline-offset: 2px;
 }
 
@@ -253,7 +278,7 @@ section {
 
 /* Focus styles for keyboard navigation */
 :focus-visible {
-  outline: 2px solid #667eea;
+  outline: 2px solid var(--text-color);
   outline-offset: 2px;
 }
 
@@ -262,22 +287,26 @@ section {
    ========================================================================== */
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
 }
 
 @keyframes pulse-glow {
+
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(118, 75, 162, 0.3);
+    box-shadow: 0 0 20px var(--accent-glow);
   }
+
   50% {
-    box-shadow: 0 0 40px rgba(118, 75, 162, 0.6);
+    box-shadow: 0 0 40px var(--accent-glow);
   }
 }
 
@@ -285,9 +314,11 @@ section {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -297,6 +328,7 @@ section {
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(100%);
   }
@@ -307,6 +339,7 @@ section {
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -326,7 +359,7 @@ section {
     background: white;
     color: black;
   }
-  
+
   .container {
     max-width: 100%;
   }

@@ -15,8 +15,8 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 50% at 50% 100%, rgba(118, 75, 162, 0.15), transparent 50%),
-    radial-gradient(ellipse 50% 80% at 0% 50%, rgba(102, 126, 234, 0.1), transparent 40%);
+    radial-gradient(ellipse 80% 50% at 50% 100%, var(--accent-glow), transparent 50%),
+    radial-gradient(ellipse 50% 80% at 0% 50%, var(--accent-glow), transparent 40%);
   z-index: -1;
 }
 
@@ -41,9 +41,127 @@
 
 .ctaContainer {
   padding-top: 15vh;
+  padding-bottom: 8rem;
+  /* Space before footer */
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+
+.contactForm {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border-radius: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(10px);
+  margin: 0 auto;
+  /* Center the form */
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fieldLabel {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.fieldInput,
+.fieldTextarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  background: transparent;
+  color: var(--text-color);
+  outline: none;
+}
+
+.fieldTextarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.fieldInput:focus-visible,
+.fieldTextarea:focus-visible {
+  outline: 2px solid var(--card-border);
+  outline-offset: 2px;
+}
+
+.submitRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.submitButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--card-border);
+  background: var(--accent-gradient);
+  color: var(--bg-color);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.25s var(--transition-smooth), opacity 0.25s var(--transition-smooth);
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submitButton:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.helperText {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.inlineLink {
+  color: var(--text-color);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.formStatus {
+  min-height: 1.5rem;
+}
+
+.successText {
+  margin: 0;
+  color: var(--text-color);
+  opacity: 0.9;
+}
+
+.errorText {
+  margin: 0;
+  color: var(--text-color);
+  opacity: 0.9;
 }
 
 /* Animated CTA Link with Gradient Underline */
@@ -56,7 +174,7 @@
   text-decoration: none;
   display: inline-block;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.9) 100%);
+  background: var(--accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -69,7 +187,7 @@
   left: 0;
   width: 100%;
   height: 4px;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background: var(--accent-gradient);
   background-size: 200% 100%;
   border-radius: 2px;
   transform: scaleX(0.3);
@@ -82,9 +200,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -99,7 +219,7 @@
 }
 
 .ctaLink:focus-visible {
-  outline: 2px solid #667eea;
+  outline: 2px solid var(--text-color);
   outline-offset: 4px;
 }
 
@@ -121,7 +241,7 @@
 /* Footer */
 .footer {
   padding: 2.5rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--card-border);
   margin-top: auto;
 }
 
@@ -129,7 +249,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
   font-size: 0.9rem;
 }
 
@@ -148,21 +268,21 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.6);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-muted);
   transition: all 0.3s ease;
 }
 
 .socialLink:hover {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
-  border-color: rgba(102, 126, 234, 0.5);
-  color: #fff;
+  background: var(--glass-bg);
+  border-color: var(--text-color);
+  color: var(--text-color);
   transform: translateY(-3px);
 }
 
 .socialLink:focus-visible {
-  outline: 2px solid #667eea;
+  outline: 2px solid var(--text-color);
   outline-offset: 2px;
 }
 
@@ -191,6 +311,14 @@
   .ctaContainer {
     padding-top: 0;
     gap: 1.5rem;
+  }
+
+  .contactForm {
+    padding: 1rem;
+  }
+
+  .fieldGrid {
+    grid-template-columns: 1fr;
   }
 
   .ctaLink {

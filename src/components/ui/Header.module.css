@@ -1,0 +1,318 @@
+.wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.5rem;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wrapper[data-hidden="true"] {
+    transform: translateY(-100%);
+}
+
+.shell {
+    max-width: 1440px;
+    margin: 0 auto;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Glass Panel for Nav and Actions */
+.glassPanel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius: 9999px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Logo Section */
+.logoLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    width: auto;
+    border-radius: 12px;
+    transition: opacity 0.2s ease;
+}
+
+.logoLink:hover {
+    opacity: 0.8;
+}
+
+.logoImage {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Navigation Template Styles */
+/* Adapted from Uiverse.io by GustavoAlmeidaPuff */
+
+.nav {
+    --round: 999px;
+    --p-x: 4px;
+    --p-y: 4px;
+    --w-label: 85px;
+    /* Adjusted for 6 items to fit better */
+    --color-primary: var(--glass-bg);
+    /* Matches template background */
+    --color-secondary: var(--text-color);
+    --color-pure: var(--bg-color);
+    --muted: var(--card-border);
+    isolation: isolate;
+
+    /* Template .wrap styles */
+    display: flex;
+    align-items: center;
+    padding: var(--p-y) var(--p-x);
+    position: relative;
+
+    /* Glass Effect (Strong Blur) */
+    background: rgba(10, 10, 10, 0.6);
+    /* Slightly more transparent to let blur show */
+    backdrop-filter: blur(50px) saturate(180%);
+    -webkit-backdrop-filter: blur(50px) saturate(180%);
+
+
+    border-radius: var(--round);
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    /* Deep shadow for depth */
+}
+
+
+.nav::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    pointer-events: none;
+}
+
+/* Light mode override if needed, but keeping dark pref */
+[data-theme='light'] .nav {
+    background: #e8e8e8;
+    --color-secondary: #212121;
+    box-shadow: 0 4px 20px rgba(20, 20, 20, 0.45);
+}
+
+.nav input {
+    height: 0;
+    width: 0;
+    position: absolute;
+    overflow: hidden;
+    display: none;
+    visibility: hidden;
+}
+
+.tab {
+    cursor: pointer;
+    outline: none;
+    font-size: 0.875rem;
+    letter-spacing: initial;
+    font-weight: 500;
+    color: #888;
+    /* Inactive color from template/image look */
+    background: transparent;
+    padding: 10px 0;
+    width: var(--w-label);
+    min-width: var(--w-label);
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    transition: color 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    -webkit-tap-highlight-color: transparent;
+    border: none;
+}
+
+.tab span {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+/* Selected State */
+.nav input:checked+.tab {
+    color: #fff;
+    /* Active text color */
+}
+
+[data-theme='light'] .nav input:checked+.tab {
+    color: #000;
+}
+
+/* Bar (Underline/Indicator) - From template */
+.bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: absolute;
+    transform-origin: 0 0 0;
+    height: 100%;
+    width: var(--w-label);
+    z-index: 0;
+    transition: transform 0.5s cubic-bezier(0.33, 0.83, 0.99, 0.98);
+    pointer-events: none;
+}
+
+.bar::before,
+.bar::after {
+    content: "";
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    background: #fff;
+    /* Template accent */
+    opacity: 0.05;
+}
+
+.bar::before {
+    top: 0;
+    border-radius: 0 0 9999px 9999px;
+}
+
+.bar::after {
+    bottom: 0;
+    border-radius: 9999px 9999px 0 0;
+}
+
+/* Slidebar (The Pill) */
+.slidebar {
+    position: absolute;
+    height: calc(100% - (var(--p-y) * 2));
+    width: var(--w-label);
+    border-radius: var(--round);
+    background: #383838;
+    /* Template Dark Mode muted/pill color */
+    transform-origin: 0 0 0;
+    z-index: 0;
+    transition: transform 0.5s cubic-bezier(0.33, 0.83, 0.99, 0.98);
+    pointer-events: none;
+    left: var(--p-x);
+    /* Initial offset match padding */
+}
+
+/* Light mode slidebar */
+[data-theme='light'] .slidebar {
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Sliding Logic for 6 items */
+/* Tab 1 */
+.nav input:nth-of-type(1):checked~.bar,
+.nav input:nth-of-type(1):checked~.slidebar {
+    transform: translateX(0%);
+}
+
+/* Tab 2 */
+.nav input:nth-of-type(2):checked~.bar,
+.nav input:nth-of-type(2):checked~.slidebar {
+    transform: translateX(100%);
+}
+
+/* Tab 3 */
+.nav input:nth-of-type(3):checked~.bar,
+.nav input:nth-of-type(3):checked~.slidebar {
+    transform: translateX(200%);
+}
+
+/* Tab 4 */
+.nav input:nth-of-type(4):checked~.bar,
+.nav input:nth-of-type(4):checked~.slidebar {
+    transform: translateX(300%);
+}
+
+/* Tab 5 */
+.nav input:nth-of-type(5):checked~.bar,
+.nav input:nth-of-type(5):checked~.slidebar {
+    transform: translateX(400%);
+}
+
+/* Tab 6 */
+.nav input:nth-of-type(6):checked~.bar,
+.nav input:nth-of-type(6):checked~.slidebar {
+    transform: translateX(500%);
+}
+
+/* Hover Effects from template */
+.nav input:nth-of-type(1)+.tab:hover~.slidebar {
+    transform: translateX(0%);
+    opacity: 0.8;
+}
+
+.nav input:nth-of-type(2)+.tab:hover~.slidebar {
+    transform: translateX(100%);
+    opacity: 0.8;
+}
+
+.nav input:nth-of-type(3)+.tab:hover~.slidebar {
+    transform: translateX(200%);
+    opacity: 0.8;
+}
+
+.nav input:nth-of-type(4)+.tab:hover~.slidebar {
+    transform: translateX(300%);
+    opacity: 0.8;
+}
+
+.nav input:nth-of-type(5)+.tab:hover~.slidebar {
+    transform: translateX(400%);
+    opacity: 0.8;
+}
+
+.nav input:nth-of-type(6)+.tab:hover~.slidebar {
+    transform: translateX(500%);
+    opacity: 0.8;
+}
+
+/* Mobile Responsive */
+.mobileMenuBtn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    padding: 8px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+        /* Hidden on mobile */
+    }
+
+    .mobileMenuBtn {
+        display: block;
+    }
+
+    .wrapper {
+        padding: 1rem;
+    }
+}

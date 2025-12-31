@@ -3,8 +3,10 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import SmoothScroll from '@/components/providers/SmoothScroll'
 import Particles from '@/components/ui/Particles'
-import Preloader from '@/components/ui/Preloader'
 import SkipLink from '@/components/ui/SkipLink'
+import Preloader from '@/components/ui/Preloader'
+import Header from '@/components/ui/Header'
+import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { SITE_CONFIG } from '@/lib/constants'
 import {
   generateOrganizationSchema,
@@ -24,7 +26,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
   title: {
     default: SITE_CONFIG.title,
-    template: '%s | WE3',
+    template: '%s | Crevix',
   },
   description: SITE_CONFIG.description,
   keywords: [
@@ -136,10 +138,15 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Preloader />
-        <SkipLink />
-        <Particles />
-        <SmoothScroll>{children}</SmoothScroll>
+        <ThemeProvider>
+          <SkipLink />
+          <Preloader />
+          <Header />
+          <Particles />
+          <SmoothScroll>
+            <div id="main-content-wrapper">{children}</div>
+          </SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   )

@@ -17,14 +17,15 @@ interface MediaQueryState {
 }
 
 export function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState<boolean>(false)
+  const [matches, setMatches] = useState<boolean>(() => {
+    if (!isClient) return false
+    return window.matchMedia(query).matches
+  })
 
   useEffect(() => {
     if (!isClient) return
 
     const mediaQuery = window.matchMedia(query)
-    setMatches(mediaQuery.matches)
-
     const handler = (event: MediaQueryListEvent) => {
       setMatches(event.matches)
     }
@@ -41,10 +42,13 @@ export function useBreakpoint(breakpoint: BreakpointKey): boolean {
 }
 
 export function useResponsive(): MediaQueryState {
-  const isMobile = !useBreakpoint('tablet')
-  const isTablet = useBreakpoint('tablet') && !useBreakpoint('desktop')
-  const isDesktop = useBreakpoint('desktop')
+  const isAtLeastTablet = useBreakpoint('tablet')
+  const isAtLeastDesktop = useBreakpoint('desktop')
   const isWide = useBreakpoint('wide')
+
+  const isMobile = !isAtLeastTablet
+  const isTablet = isAtLeastTablet && !isAtLeastDesktop
+  const isDesktop = isAtLeastDesktop
 
   return { isMobile, isTablet, isDesktop, isWide }
 }

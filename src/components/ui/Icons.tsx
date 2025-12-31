@@ -137,6 +137,44 @@ export function InstagramIcon({ size = 18, ...props }: IconProps) {
   )
 }
 
+export function WhatsAppIcon({ size = 18, ...props }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      {...defaultProps}
+      strokeWidth={2}
+      {...props}
+      aria-hidden={!props['aria-label']}
+    >
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+    </svg>
+  )
+}
+
+export function CrevixLogo({ size = 32, ...props }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+      aria-label="Crevix Logo"
+    >
+      {/* Geometric 'C' Shape (Left half of a ring) */}
+      <path
+        d="M13 4 A 8 8 0 0 0 13 20 L 13 15 A 3 3 0 0 1 13 9 Z"
+        fill="currentColor"
+      />
+      {/* Dot */}
+      <circle cx="18" cy="18" r="2.5" fill="currentColor" />
+    </svg>
+  )
+}
+
 // Icon map for dynamic rendering
 export const iconMap = {
   design: DesignIcon,
@@ -146,6 +184,7 @@ export const iconMap = {
   twitter: TwitterIcon,
   linkedin: LinkedInIcon,
   instagram: InstagramIcon,
+  whatsapp: WhatsAppIcon,
 } as const
 
 export type IconName = keyof typeof iconMap

@@ -8,6 +8,7 @@ import { useEffect, useRef, useCallback } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { PROCESS_STEPS } from '@/lib/constants'
+import ScrollReveal from '@/components/ui/ScrollReveal'
 import styles from './Process.module.css'
 
 
@@ -27,6 +28,25 @@ export default function Process() {
   }, [])
 
   useEffect(() => {
+    const centerSectionIfHashMatches = () => {
+      if (!sectionRef.current) return
+      if (window.location.hash !== '#process') return
+
+      const rect = sectionRef.current.getBoundingClientRect()
+      const sectionCenterY = rect.top + rect.height / 2
+      const viewportCenterY = window.innerHeight / 2
+      const delta = sectionCenterY - viewportCenterY
+
+      // Avoid tiny adjustments (and repeated smooth-scroll jitter)
+      if (Math.abs(delta) < 24) return
+
+      window.scrollBy({ top: delta, behavior: 'smooth' })
+    }
+
+    // Run on mount (initial deep-link) and on hash changes (in-page nav)
+    const t = window.setTimeout(centerSectionIfHashMatches, 50)
+    window.addEventListener('hashchange', centerSectionIfHashMatches)
+
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
@@ -71,12 +91,17 @@ export default function Process() {
             start: 'top center',
             end: 'bottom center',
             toggleActions: 'play reverse play reverse',
+            toggleClass: { targets: step, className: styles.stepActive! },
           },
         })
       })
     }, sectionRef)
 
-    return () => ctx.revert()
+    return () => {
+      window.clearTimeout(t)
+      window.removeEventListener('hashchange', centerSectionIfHashMatches)
+      ctx.revert()
+    }
   }, [])
 
   return (
@@ -87,10 +112,14 @@ export default function Process() {
       aria-labelledby="process-title"
     >
       <div className="container">
-        <h2 id="process-title" className={styles.sectionLabel}>
-          Our Process
-        </h2>
-        <p className={styles.sectionTagline}>Simple. Clear. Honest.</p>
+        <ScrollReveal>
+          <h2 id="process-title" className={styles.sectionLabel}>
+            Our Process
+          </h2>
+        </ScrollReveal>
+        <ScrollReveal delay={0.05}>
+          <p className={styles.sectionTagline}>Simple. Clear. Honest.</p>
+        </ScrollReveal>
 
         <div className={styles.timelineContainer} role="list" aria-label="Process steps">
           {/* SVG Line with Gradient */}
@@ -102,9 +131,9 @@ export default function Process() {
           >
             <defs>
               <linearGradient id="lineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#667eea" />
-                <stop offset="50%" stopColor="#764ba2" />
-                <stop offset="100%" stopColor="#f093fb" />
+                <stop offset="0%" stopColor="var(--text-color)" stopOpacity="0.85" />
+                <stop offset="50%" stopColor="var(--text-color)" stopOpacity="0.55" />
+                <stop offset="100%" stopColor="var(--text-color)" stopOpacity="0.25" />
               </linearGradient>
             </defs>
             <path
@@ -133,10 +162,12 @@ export default function Process() {
           ))}
         </div>
 
-        <p className={styles.processNote}>
-          We take on a limited number of projects so each one gets the attention
-          it deserves.
-        </p>
+        <ScrollReveal delay={0.1}>
+          <p className={styles.processNote}>
+            We take on a limited number of projects so each one gets the attention
+            it deserves.
+          </p>
+        </ScrollReveal>
       </div>
     </section>
   )

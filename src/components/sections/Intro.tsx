@@ -26,10 +26,12 @@ export default function Intro() {
     mm.add(
       `(min-width: ${BREAKPOINTS.tablet}px) and (prefers-reduced-motion: no-preference)`,
       () => {
+        // Scroll-out effect: float up and away into background
         gsap.to([titleRef.current, subRef.current, ctaRef.current], {
-          y: -100,
+          y: -50, // Less vertical movement
+          z: -100, // Move into depth
           opacity: 0,
-          filter: 'blur(8px)',
+          scale: 0.95, // Slight shrink
           ease: 'none',
           scrollTrigger: {
             trigger: containerRef.current,
@@ -65,49 +67,38 @@ export default function Intro() {
         },
       })
 
-      // 1. INTRO SEQUENCE (WE3)
+      // 1. INTRO SEQUENCE
+      // Calm, slow fade in/out with slight depth
       tl.to(introTextRef.current, {
         opacity: 1,
         y: 0,
-        duration: 1.2,
-        ease: 'power3.out',
+        z: 0,
+        duration: 1.5,
+        ease: 'power2.out',
       })
         .to(
           introTextRef.current,
           {
-            y: -50,
-            duration: 1.5,
-            ease: 'none',
-          },
-          '<'
-        )
-        .to(
-          introTextRef.current,
-          {
+            y: -20,
+            z: -50,
             opacity: 0,
-            y: -100,
-            duration: 0.8,
+            duration: 1.2,
             ease: 'power2.in',
           },
-          '>-0.5'
+          '>+0.2'
         )
         // 2. HERO REVEAL
-        .to(titleRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power3.out',
-        })
-        .to(
-          [subRef.current, ctaRef.current],
+        // Semantic, depth-based entrance
+        .fromTo([titleRef.current, subRef.current, ctaRef.current],
+          { y: 30, opacity: 0, z: 20 },
           {
             opacity: 1,
             y: 0,
-            duration: 1,
-            stagger: 0.2,
+            z: 0,
+            duration: 1.2,
+            stagger: 0.1, // Faster stagger for cohesion
             ease: 'power2.out',
-          },
-          '-=0.6'
+          }
         )
     }, containerRef)
 
@@ -124,7 +115,7 @@ export default function Intro() {
       {/* INTRO LAYER */}
       <div className={styles.introOverlay} aria-hidden="true">
         <div className={styles.introText} ref={introTextRef}>
-          WE3
+          Crevix
         </div>
       </div>
 

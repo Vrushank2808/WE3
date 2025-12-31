@@ -4,25 +4,25 @@
  */
 
 export const SITE_CONFIG = {
-  name: 'WE3',
-  title: 'WE3 | Premium Web Design & Development Agency',
+  name: 'Crevix',
+  title: 'Crevix | Premium Web Design & Development Agency',
   description:
-    'WE3 is a boutique digital agency specializing in premium web design, development, and digital storytelling. We build websites properly — no buzzwords, just quality.',
+    'Crevix is a boutique digital agency specializing in premium web design, development, and digital storytelling.',
   shortDescription: 'Premium editorial web design and digital storytelling.',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://we3-agency-demo.vercel.app',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://crevix.agency',
   locale: 'en_US',
   type: 'website',
-  author: 'WE3 Agency',
-  email: 'hello@we3.agency',
+  author: 'Crevix',
+  email: 'hello@crevix.agency',
   social: {
-    twitter: '@we3agency',
-    linkedin: 'https://linkedin.com/company/we3agency',
-    instagram: 'https://instagram.com/we3agency',
+    twitter: '@crevix',
+    linkedin: 'https://linkedin.com/company/crevix',
+    instagram: 'https://www.instagram.com/crevix.works/?utm_source=ig_web_button_share_sheet',
   },
 } as const
 
 export const SEO_DEFAULTS = {
-  titleTemplate: '%s | WE3',
+  titleTemplate: '%s | Crevix',
   defaultTitle: SITE_CONFIG.title,
   openGraph: {
     type: 'website',
@@ -94,21 +94,21 @@ export const PROJECTS = [
     id: 1,
     title: 'Luxe Boutique',
     category: 'E-Commerce',
-    gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    gradient: 'linear-gradient(135deg, var(--glass-bg) 0%, var(--card-bg) 100%)',
     slug: 'luxe-boutique',
   },
   {
     id: 2,
     title: 'Fintech Dashboard',
     category: 'Web Application',
-    gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    gradient: 'linear-gradient(225deg, var(--glass-bg) 0%, var(--card-bg) 100%)',
     slug: 'fintech-dashboard',
   },
   {
     id: 3,
     title: 'Creative Studio',
     category: 'Portfolio',
-    gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    gradient: 'linear-gradient(90deg, var(--glass-bg) 0%, var(--card-bg) 100%)',
     slug: 'creative-studio',
   },
 ] as const
